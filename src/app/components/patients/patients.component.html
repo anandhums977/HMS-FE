@@ -1,0 +1,113 @@
+<!--components/patients.component.html -->
+
+<div class="w-full">
+  <div class="flex-1">
+    <div class="max-w-lg">
+      <h2>Add New Patient</h2>
+      <form>
+        <div class="block">
+          <label for="name" class="required">Name</label>
+          <input
+            type="text"
+            [(ngModel)]="name"
+            name="name"
+            id="name"
+            placeholder="Patient's Name"
+            required
+          />
+        </div>
+        <div class="block">
+          <label for="age" class="required">Age</label>
+          <input
+            type="number"
+            [(ngModel)]="age"
+            name="age"
+            id="age"
+            placeholder="Patient's Age"
+            required
+          />
+        </div>
+        <div class="block">
+          <label for="gender" class="required">Gender</label>
+          <select
+            [(ngModel)]="gender"
+            name="gender"
+            id="gender"
+          >
+            <option value="Select" selected>Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="flex">
+          <button
+            *ngIf="!isEditing"
+            type="submit"
+            class="bg-blue-700"
+            (click)="onAddClick()"
+          >
+            Add Patient
+          </button>
+          <button
+            *ngIf="isEditing"
+            type="submit"
+            class="bg-blue-700"
+            (click)="onUpdateClick()"
+          >
+            Update Patient
+          </button>
+          <button
+            *ngIf="isEditing"
+            type="button"
+            class="bg-gray-500"
+            (click)="onCancelEdit()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto">
+    <h2>Patients ({{ PatientsArray.length }})</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of PatientsArray">
+          <td>{{ patient.name }}</td>
+          <td>{{ patient.age }}</td>
+          <td>{{ patient.gender }}</td>
+          <td>
+            <button
+              type="button"
+              class="bg-yellow-400"
+              (click)="onEditPatient(patient._id)"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="bg-red-600"
+              (click)="onDeletePatient(patient._id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="PatientsArray.length === 0">
+          <td colspan="4" class="text-center">No patients found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
