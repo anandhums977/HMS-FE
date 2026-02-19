@@ -1,0 +1,102 @@
+<!--components/doctors.component.html -->
+
+<div class="w-full">
+  <div class="flex-1">
+    <div class="max-w-lg">
+      <h2>Add New Doctor</h2>
+      <form>
+        <div class="block">
+          <label for="name" class="required">Name</label>
+          <input
+            type="text"
+            [(ngModel)]="name"
+            name="name"
+            id="name"
+            placeholder="Doctor's Name"
+            required
+          />
+        </div>
+        <div class="block">
+          <label for="speciality" class="required">Speciality</label>
+          <select
+            [(ngModel)]="speciality"
+            name="speciality"
+            id="speciality"
+          >
+            <option value="Select" selected>Select</option>
+            <option value="Anesthesiologist">Anesthesiologist</option>
+            <option value="Cardiologist">Cardiologist</option>
+            <option value="Dermatologist">Dermatologist</option>
+            <option value="Gastroenterologist">Gastroenterologist</option>
+            <option value="Neurologist">Neurologist</option>
+            <option value="Ophthalmologist">Ophthalmologist</option>
+          </select>
+        </div>
+        <div class="flex">
+          <button
+            *ngIf="!isEditing"
+            type="submit"
+            class="bg-green-700"
+            (click)="onAddClick()"
+          >
+            Add Doctor
+          </button>
+          <button
+            *ngIf="isEditing"
+            type="submit"
+            class="bg-green-700"
+            (click)="onUpdateClick()"
+          >
+            Update Doctor
+          </button>
+          <button
+            *ngIf="isEditing"
+            type="button"
+            class="bg-gray-500"
+            (click)="onCancelEdit()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto">
+    <h2>Doctors ({{ DoctorsArray.length }})</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Speciality</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctor of DoctorsArray">
+          <td>{{ doctor.name }}</td>
+          <td>{{ doctor.speciality }}</td>
+          <td>
+            <button
+              type="button"
+              class="bg-yellow-400"
+              (click)="onEditDoctor(doctor._id)"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="bg-red-600"
+              (click)="onDeleteDoctor(doctor._id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="DoctorsArray.length === 0">
+          <td colspan="3" class="text-center">No doctors found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
