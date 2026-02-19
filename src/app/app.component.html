@@ -1,0 +1,26 @@
+<!-- app.component.html -->
+
+<div class="block">
+    <h2>Hospital Management System</h2>
+</div>
+
+<div class="text-sm">
+    <ul>
+        <li>
+            <button class="nav-item active" id="nav-appointments" (click)="navClick('appointments')">
+                Appointments
+            </button>
+        </li>
+        <li>
+            <button class="nav-item" id="nav-doctors" (click)="navClick('doctors')">
+                Doctors
+            </button>
+        </li>
+        <li>
+            <button class="nav-item" id="nav-patients" (click)="navClick('patients')">
+                Patients
+            </button>
+        </li>
+    </ul>
+</div>
+<router-outlet></router-outlet>
